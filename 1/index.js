@@ -1,28 +1,55 @@
-const kereses = document.querySelector('#kereses');
-kereses.type = 'button';
-const sorozatCim = document.querySelector('#sorozat-cim');
-kereses.addEventListener('click', () => {
+// Search form megjelenítése
 
-});
-
-function xhr(method, url, data, cb) {
-  let xhr = new XMLHttpRequest();
-  xhr.open(method, url);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
-  xhr.addEventListener('load', () => {
-    let { response, status } = xhr;
-    let res = JSON.parse(response);
-    if (status >= 200 && status < 400) {
-      cb({ response: res, status });
-    } else {
-      cb({ response: res, status });
-    }
-  });
-
-  if (data) {
-    xhr.send(JSON.stringify(data));
-  } else {
-    xhr.send();
+function searchForm() {
+    return `
+    <form>
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <input id="sorozat-cim" class="form-control" type="text" name="title" placeholder="Sorozat címe" />
+        </div>
+        <input id="kereses" type="button" value="Keresés" class="btn btn-primary" />
+      </div>
+    </form>
+    `;
   }
-}
+  
+  document.querySelector('#searchForm').innerHTML = searchForm();
+  
+  // Találatok megjelenítése
+  
+  const kereses = document.querySelector('#kereses');
+  const sorozatCim = document.querySelector('#sorozat-cim');
+  const eredmenyek = document.querySelector('#eredmenyek');
+  
+  let sorozatok = [];
+  
+  kereses.addEventListener('click', async () => {
+    const resp = await fetch(`http://api.tvmaze.com/search/shows?q=${sorozatCim.value}`)
+    const response = await resp.json();
+    sorozatok = response.map(sorozat => sorozat.show);
+    console.log(sorozatok);
+  
+    eredmenyek.innerHTML = showTileset(sorozatok);
+  });
+  
+  function showTileset(shows) {
+    return shows.map(show => showTile(show)).join('');
+  }
+  
+  function showTile(show) {
+    const rating = show.rating.average;
+    let ratingLabel;
+    if (rating) {
+      ratingLabel = rating + '/10';
+    } else {
+      ratingLabel = 'unknown';
+    }
+    return `
+    <div class="film">
+      <div class="title">${show.name}</div>
+      <img src="${show.image ? show.image.medium : ''}" />
+      <div class="rating">${ratingLabel}</div>
+    </div>
+    `
+  }
+  
