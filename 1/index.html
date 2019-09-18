@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TvMaze</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css"></link>
+</head>
+<body>
+  <div class="layout">
+    <div class="header">
+      <div class="navbar navbar-dark bg-dark navbar-expand">
+        <a class="navbar-brand" href="/">TvMaze</a>
+      </div>
+    </div>
+    <div class="body">
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-12">
+            <form>
+              <div class="form-row align-items-center">
+                <div class="col-auto">
+                  <input id="sorozat-cim" class="form-control" type="text" name="title" placeholder="Sorozat címe" />
+                </div>
+                <input id="kereses" type="submit" value="Keresés" class="btn btn-primary" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <h1>Találatok</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12" id="eredmenyek">
+                <div class="film">
+                  <div class="title">A Wedding and a Murder</div>
+                  <img src="http://static.tvmaze.com/uploads/images/medium_portrait/65/163175.jpg" />
+                  <div class="rating">8.8/10</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
