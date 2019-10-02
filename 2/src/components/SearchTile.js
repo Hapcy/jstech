@@ -12,10 +12,10 @@ export default class SearchTile extends React.Component {
       ratingLabel = 'unknown';
     }
     return (
-      <div class="film">
-        <div class="title">{show.name}</div>
+      <div className="film">
+        <div className="title">{show.name}</div>
         <img src={show.image ? show.image.medium : ''} />
-        <div class="rating">{ratingLabel}</div>
+        <div className="rating">{ratingLabel}</div>
       </div>
     );
   }
