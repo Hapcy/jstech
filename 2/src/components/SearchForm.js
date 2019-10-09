@@ -14,7 +14,8 @@ class SearchForm extends React.Component {
     this.setState(s => ({ text: v }));
   }
 
-  render() { 
+  render() {
+    const { onSubmit = () => {}  } = this.props;
     return (
       <div className="col-12" id="searchForm">
         <form>
@@ -30,7 +31,13 @@ class SearchForm extends React.Component {
                 onChange={event => this.inputChanged(event)}
               />
             </div>
-            <input id="kereses" type="button" value="Keresés" className="btn btn-primary" />
+            <input
+              id="kereses"
+              type="button"
+              value="Keresés"
+              className="btn btn-primary"
+              onClick={() => onSubmit(this.state.text)}
+            />
           </div>
         </form>
       </div>

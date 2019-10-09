@@ -1,18 +1,35 @@
 import React from 'react';
 import SearchForm from './SearchForm';
-import SearchTileset from './SearchTileset';
+import SearchTileset from './SearchTilesetHooks';
 
-function SearchPage() {
-  return (
-    <>
-      <div className="row">
-        <SearchForm />
-      </div>
-      <div className="row mt-2">
-        <SearchTileset />
-      </div>
-    </>
-  );
+class SearchPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+    };
+    this.searchFormRef = React.createRef();
+  }
+
+  render() {
+    return (
+      <>
+        <div className="row">
+          <SearchForm
+            ref={this.searchFormRef}
+            onSubmit={text => this.setState({ searchTerm: text })}
+          />
+          {/* <button
+            onClick={() => console.log(this.searchFormRef.current.state)}
+          >asd</button> */}
+        </div>
+        <div className="row mt-2">
+          <SearchTileset searchTerm={this.state.searchTerm} />
+        </div>
+      </>
+    );
+  }
 }
 
 export default SearchPage;

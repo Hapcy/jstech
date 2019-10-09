@@ -1,0 +1,54 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 1fr;
+}
+
+.header {
+  grid-row: 1 / 2;
+  grid-column: 1 / 1;
+  width: 100%;
+}
+
+.body {
+  grid-row: 2 / 3;
+  grid-column: 1 / 1;
+}
+
+#eredmenyek {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#eredmenyek .film {
+  flex-basis: 33%;
+}
+
+.film {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 300ms ease-in-out;
+  position: relative;
+}
+
+.film:hover {
+  transform: perspective(20px) translateZ(1px);
+}
+
+.film img {
+  z-index: -1;
+}
+
+.film .title {
+  align-self: stretch;
+  text-align: center;
+}
+
+.film .rating {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: gainsboro;
+  padding: 0.5em;
+}
