@@ -1,4 +1,5 @@
 import React from 'react';
+import { FavouritesContext } from './FavouritesProvider';
 
 
 export default class SearchTile extends React.Component {
@@ -12,11 +13,19 @@ export default class SearchTile extends React.Component {
       ratingLabel = 'unknown';
     }
     return (
-      <div className="film">
-        <div className="title">{show.name}</div>
-        <img src={show.image ? show.image.medium : ''} />
-        <div className="rating">{ratingLabel}</div>
-      </div>
+      <FavouritesContext.Consumer>
+        {
+          ({ favourites, toggleFavourite }) => (
+            <div className="film" onClick={() => toggleFavourite(show.id)}>
+              <div className="title">{show.name}</div>
+              <img src={show.image ? show.image.medium : ''} />
+              <div className="rating">{ratingLabel}</div>
+              { favourites.includes(show.id) ? <span>Favourite</span> : null }
+            </div>
+          )
+        }
+      </FavouritesContext.Consumer>
+      
     );
   }
 }
