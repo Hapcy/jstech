@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TodoItem from './TodoItem';
+import { TodoContext } from './TodoProvider';
 
-export default function Main({ todos, toggleTodo, deleteTodo }) {
+export default function Main() {
+  const { todos } = useContext(TodoContext);
   return (
     <section className="main">
       <input id="toggle-all" className="toggle-all" type="checkbox" />
@@ -12,8 +14,6 @@ export default function Main({ todos, toggleTodo, deleteTodo }) {
             <TodoItem
               key={todo.id}
               item={todo}
-              toggle={() => toggleTodo(todo.id)}
-              deleteItem={() => deleteTodo(todo.id)}
             ></TodoItem>
           ))
         }

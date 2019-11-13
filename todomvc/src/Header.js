@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from './TodoProvider';
 
 const ENTER_KEY = 'Enter';
 
-export default function Header({ submitTodo }) {
+export default function Header() {
+  const { addNewTodo } = useContext(TodoContext);
 
   function handleKeyPress(e) {
     if (e.key === ENTER_KEY) {
-      submitTodo(e.target.value);
+      addNewTodo(e.target.value);
       e.target.value = '';
     } 
   }
